@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 
 @RestController
 public class MainController {
-    private static final String JSON_GEOCODE = "https://maps.googleapis.com/maps/api/geocode/json?address=317+Carriage+Run+Road,+Annapolis,+MD,+21403&key=AIzaSyCU1EhtThjd8UcUdNLeJVLuYR-jApwneUg";
+    private static final String JSON_GEOCODE = "https://maps.googleapis.com/maps/api/geocode/json?address=317+Carriage+Run+Road,+Annapolis,+MD,+21403&key=<insert key here>";
 
     @Autowired
     private ParsingService parsingService;
