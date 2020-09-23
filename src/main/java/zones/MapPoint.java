@@ -58,29 +58,5 @@ public class MapPoint {
         }
         return list;
     }
-
-    // Driver Code
-//    public static void main(String[] args) throws Exception
-//    {
-//        System.out.println("hello world");
-//        try{
-//            MapPoint startApp = new MapPoint();
-//
-//            //find zones and put in array
-//            List<String>zones = startApp.findZones(-118.149303,34.179435);
-//
-//            //loop throug array and output zones
-//            int index1 = 0;
-//            if(zones.size() >0){
-//                while (index1 < zones.size()) {
-//                    System.out.println("in zone: " + zones.get(index1).toString());
-//                    index1++;
-//                }
-//            }
-//        }catch(Exception exc) {
-//            System.out.println(exc.getMessage());
-//        }
-//    }
-
 }
 
