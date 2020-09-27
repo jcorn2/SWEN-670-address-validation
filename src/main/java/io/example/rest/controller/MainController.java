@@ -25,23 +25,37 @@ public class MainController {
     public LinkedHashMap main(@RequestParam(name = "address", required = true) String address) throws Exception {
         LinkedHashMap latLng;
         String mapquestUrl = JSON_GEOCODE + address;
+        LinkedHashMap addressInfo;
+        String geocodeQualityCode;
 
         try {
             // send request for lat and long values from mapquest api
             LinkedHashMap response = (LinkedHashMap) parsingService.parse(mapquestUrl);
 
-            // extract lat and long values from nested return object
+            // extract address info from nested return object
             ArrayList<Object> results = (ArrayList<Object>) response.get("results");
             LinkedHashMap topResult = (LinkedHashMap) results.get(0);
             ArrayList<Object> locations = (ArrayList<Object>) topResult.get("locations");
-            LinkedHashMap addressInfo = (LinkedHashMap) locations.get(0);
-            latLng = (LinkedHashMap) addressInfo.get("latLng");
+            addressInfo = (LinkedHashMap) locations.get(0);
         } catch (Exception exe) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Failed to Retrieve Address Information"
+            );
+        }
+
+        /**
+         * Mapquest returns a geoQualityCode value that specifies how exact the return match is. The last three letters
+         * are confidence ratings for different areas. A value of AAA means that the result has the highest confidence
+         * value for each area.
+         */
+        geocodeQualityCode = (String) addressInfo.get("geocodeQualityCode");
+        if (!geocodeQualityCode.substring(2).equals("AAA")) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Invalid address"
             );
         }
 
+        latLng = (LinkedHashMap) addressInfo.get("latLng");
         // Use MapPoint class to find zone for user's lat and long
         LinkedHashMap zoneCode = new LinkedHashMap<String, String>();
         try {
