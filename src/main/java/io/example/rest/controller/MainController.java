@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 public class MainController {
-    private static final String JSON_GEOCODE = "http://www.mapquestapi.com/geocoding/v1/address?key=UMSAjF5lBczBQcjA7IbstEJs1l4e7I4V&location=";
+    private static final String JSON_GEOCODE = "http://www.mapquestapi.com/geocoding/v1/address?key=&location=";
     MapPoint startApp = new MapPoint();
 
     @Autowired

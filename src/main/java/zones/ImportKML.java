@@ -32,7 +32,7 @@ public class ImportKML {
 
 
     public ImportKML() throws Exception {
-        String dbName = "kmlfile";
+        String dbName = "chatbot";
         String dbUser = "test";
         String dbPwd = "password";
         String dbURL = "jdbc:mysql://localhost:3306/chatbot?autoReconnect=true&useSSL=false";
