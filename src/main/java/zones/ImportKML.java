@@ -33,9 +33,9 @@ public class ImportKML {
 
     public ImportKML() throws Exception {
         String dbName = "kmlfile";
-        String dbUser = "postgres";
-        String dbPwd = "passwordpassword";
-        String dbURL = "jdbc:postgresql://localhost:5432/kmlfile";
+        String dbUser = "test";
+        String dbPwd = "password";
+        String dbURL = "jdbc:mysql://localhost:3306/chatbot?autoReconnect=true&useSSL=false";
 
         myConn = DriverManager.getConnection(dbURL, dbUser, dbPwd);
         System.out.println("DB connection successful to: " + dbURL);
@@ -49,7 +49,7 @@ public class ImportKML {
             Double templon = Double.parseDouble(lon);
             int templatCord = (int) (templat * 1000000);
             int templonCord = (int) (templon * 1000000);
-            String sql = "INSERT INTO ZONE (UNQ_ZONE_ID, ZONE_CODE, LAT, LON, LAT_CORD, LON_CORD) " +
+            String sql = "INSERT INTO kml (UNQ_ZONE_ID, ZONE_CODE, LAT, LON, LAT_CORD, LON_CORD) " +
                     "VALUES("+ uniq_Zone_id + ", '" + zone +  "', " + templat + ", " + templon + ", " + templatCord +", " + templonCord +")";
             myStmt.executeUpdate(sql);
 
@@ -129,7 +129,7 @@ public class ImportKML {
 
         try {
             myStmt = myConn.createStatement();
-            myRs = myStmt.executeQuery("SELECT * FROM ZONE WHERE UNQ_ZONE_ID = " + zoneID);
+            myRs = myStmt.executeQuery("SELECT * FROM kml WHERE UNQ_ZONE_ID = " + zoneID);
 
             if(myRs != null) {
                 tempZone.setZoneID(zoneID);
@@ -158,7 +158,7 @@ public class ImportKML {
         ResultSet myRs1 = null;
         try {
             myStmt = myConn.createStatement();
-            myRs1 = myStmt.executeQuery("SELECT DISTINCT UNQ_ZONE_ID FROM ZONE");
+            myRs1 = myStmt.executeQuery("SELECT DISTINCT UNQ_ZONE_ID FROM kml");
 
             if(myRs1 != null) {
                 while(myRs1.next()) {
